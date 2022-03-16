@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show ]
+  before_action :set_transaction, only: %i[ show update ]
 
   # GET /transactions
   def index
@@ -23,6 +23,14 @@ class TransactionsController < ApplicationController
       render json: @transaction.errors, status: :unprocessable_entity
     end
   end
+ #PUT transactions/1
+  def update
+     if @transaction.update(transaction_params)
+       render json:@transaction
+     else
+       render json: @transaction.errors, status: :unprocessable_entity
+  end
+end
 
 
   private
